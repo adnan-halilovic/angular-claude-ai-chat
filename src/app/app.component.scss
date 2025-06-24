@@ -1,0 +1,11 @@
+@use '../styles/variables';
+
+.app-header {
+    padding: 1rem;
+    text-align: center;
+}
+
+.app-content {
+    padding: 1rem;
+    background-color: variables.$background-white;
+}

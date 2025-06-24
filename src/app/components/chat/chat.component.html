@@ -1,0 +1,64 @@
+<div class="chat-container">
+  <div class="messages-container">
+    @if (claudeService.messages().length === 0 && !claudeService.context()) {
+      <div class="empty-state">
+        <i class="icon-chat"></i>
+        <p>Please provide a context first to start chatting with Claude</p>
+      </div>
+    } @else if (claudeService.messages().length === 0) {
+      <div class="empty-state">
+        <i class="icon-chat"></i>
+        <p>Start a conversation about the provided context</p>
+      </div>
+    }
+    
+    @for (message of claudeService.messages(); track message.timestamp) {
+      <div class="message" [class.user-message]="message.role === 'user'" [class.assistant-message]="message.role === 'assistant'">
+        <div class="message-header">
+          <span class="role">{{ message.role === 'user' ? 'You' : 'Claude' }}</span>
+          <span class="timestamp">{{ message.timestamp | date: 'short' }}</span>
+        </div>
+        <div class="message-content">{{ message.content }}</div>
+      </div>
+    }
+    
+    @if (claudeService.isLoading()) {
+      <div class="message assistant-message loading">
+        <div class="message-header">
+          <span class="role">Claude</span>
+        </div>
+        <div class="typing-indicator">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    }
+    
+    @if (claudeService.error()) {
+      <div class="error-message">
+        <i class="icon-error"></i>
+        {{ claudeService.error() }}
+      </div>
+    }
+  </div>
+  
+  <div class="input-container">
+    <textarea
+      [(ngModel)]="userInput"
+      (keypress)="handleKeyPress($event)"
+      placeholder="Ask Claude about the context..."
+      [disabled]="!claudeService.context()"
+      class="message-input"
+      rows="3"
+    ></textarea>
+    <button 
+      (click)="sendMessage()" 
+      [disabled]="isSendDisabled()"
+      class="send-button"
+    >
+      <i class="icon-send"></i>
+      Send
+    </button>
+  </div>
+</div>

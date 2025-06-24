@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ChatComponent } from './components/chat/chat.component';
+import { ContextComponent } from './components/context/context.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [CommonModule, ChatComponent, ContextComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-ai-claude';
+  title = 'Claude AI Assistant';
+  subtitle = 'Powered by Claude 4 Sonnet';
 }

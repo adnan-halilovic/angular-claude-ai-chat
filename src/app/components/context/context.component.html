@@ -1,0 +1,49 @@
+<div class="context-container">
+  <div class="context-header">
+    <h3>Context</h3>
+    @if (claudeService.context() && !isEditing()) {
+      <div class="context-actions">
+        <button (click)="editContext()" class="icon-button" title="Edit context">
+          <i class="icon-edit"></i>
+        </button>
+        <button (click)="clearContext()" class="icon-button danger" title="Clear context">
+          <i class="icon-trash"></i>
+        </button>
+      </div>
+    }
+  </div>
+  
+  <div class="context-content">
+    @if (!claudeService.context() || isEditing()) {
+      <div class="context-editor">
+        <textarea
+          [(ngModel)]="contextInput"
+          placeholder="Provide context for Claude to answer questions about..."
+          class="context-textarea"
+          rows="10"
+        ></textarea>
+        <div class="editor-actions">
+          @if (isEditing()) {
+            <button (click)="cancelEdit()" class="button secondary">
+              Cancel
+            </button>
+          }
+          <button 
+            (click)="saveContext()" 
+            [disabled]="!contextInput().trim()"
+            class="button primary"
+          >
+            {{ isEditing() ? 'Update Context' : 'Set Context' }}
+          </button>
+        </div>
+      </div>
+    } @else {
+      <div class="context-display">
+        <p class="context-text">{{ claudeService.context()!.content }}</p>
+        <div class="context-meta">
+          <small>Context set at {{ claudeService.context()!.timestamp | date:'short' }}</small>
+        </div>
+      </div>
+    }
+  </div>
+</div>

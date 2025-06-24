@@ -1,0 +1,193 @@
+@use '../../../styles/variables';
+@use "sass:color";
+
+.context-container {
+  background-color: variables.$background-light;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.context-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  
+  h3 {
+    margin: 0;
+    color: variables.$text-primary;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+}
+
+.context-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background-color: variables.$background-light;
+  color: variables.$text-secondary;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: variables.$orange-light;
+    color: white;
+  }
+  
+  &.danger:hover {
+    background-color: #dc3545;
+  }
+  
+  i {
+    font-size: 1.125rem;
+  }
+}
+
+.context-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.context-editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.context-textarea {
+  flex: 1;
+  padding: 1rem;
+  border: 2px solid variables.$border-color;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: none;
+  transition: all 0.2s ease;
+  
+  &:focus {
+    outline: none;
+    border-color: variables.$orange-primary;
+  }
+}
+
+.editor-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &.primary {
+    background-color: variables.$orange-primary;
+    color: white;
+    
+    &:hover:not(:disabled) {
+      background-color: variables.$orange-dark;
+      transform: translateY(-1px);
+    }
+    
+    &:disabled {
+      background-color: variables.$orange-light;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+  
+  &.secondary {
+    background-color: variables.$background-light;
+    color: variables.$text-secondary;
+    
+    &:hover {
+      background-color: color.adjust(variables.$background-light, $lightness: -5%);
+    }
+  }
+}
+
+.context-display {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.context-text {
+  flex: 1;
+  padding: 1rem;
+  background-color: variables.$background-light;
+  border-radius: 8px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-y: auto;
+  margin: 0;
+  
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: variables.$background-light;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: variables.$orange-light;
+    border-radius: 4px;
+    
+    &:hover {
+      background: variables.$orange-medium;
+    }
+  }
+}
+
+.context-meta {
+  margin-top: 1rem;
+  text-align: right;
+  
+  small {
+    color: variables.$text-secondary;
+    font-size: 0.875rem;
+  }
+}
+
+// Icon styles (using simple CSS icons)
+.icon-edit::before {
+  content: "✏️";
+}
+
+.icon-trash::before {
+  content: "🗑️";
+}
+
+.icon-chat::before {
+  content: "💬";
+}
+
+.icon-error::before {
+  content: "⚠️";
+}
+
+.icon-send::before {
+  content: "➤";
+}
